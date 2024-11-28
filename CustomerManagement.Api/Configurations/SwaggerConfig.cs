@@ -37,7 +37,7 @@ namespace CustomerManagement.Api.Configurations
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Customer Management API v1");
-                c.RoutePrefix = string.Empty; // Swagger UI estará disponível na raiz
+                c.RoutePrefix = string.Empty;
             });
 
             return app;

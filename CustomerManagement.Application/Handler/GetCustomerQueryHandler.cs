@@ -1,9 +1,6 @@
 ﻿using CustomerManagement.Application.Commands;
 using CustomerManagement.Domain.Interfaces;
 using MediatR;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace CustomerManagement.Application.Handler
 {
@@ -18,14 +15,13 @@ namespace CustomerManagement.Application.Handler
 
         public async Task<List<CustomerViewModel>> Handle(GetCustomerQuery request, CancellationToken cancellationToken)
         {
-            // Aqui você pode adicionar lógica para mapear os dados do repositório para um modelo de consulta, por exemplo
             var customers = await _customerRepository.GetAllAsync();
             return customers.Select(c => new CustomerViewModel
             {
-                Id = c.Id,
+                Id = BitConverter.ToInt32(c.Id.ToByteArray(), 0),
                 CompanyName = c.CompanyName,
                 CompanySize = c.CompanySize
             }).ToList();
         }
     }
-}
+ }

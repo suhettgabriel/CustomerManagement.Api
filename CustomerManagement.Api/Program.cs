@@ -14,10 +14,14 @@ internal class Program
         // Registrar serviços no contêiner de DI
         builder.Services.AddControllers();
 
+        // Adicionar suporte ao Swagger
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
+
         // Registrar validadores do FluentValidation
         builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateCustomerCommand>());
 
-        // Registrar MediatR corretamente, usando a assembly onde os handlers estão localizados
+        // Registrar MediatR
         builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreateCustomerCommand>());
 
         // Adicionar dependências de aplicação e infraestrutura
@@ -40,6 +44,12 @@ internal class Program
         });
 
         var app = builder.Build();
+
+        // Configuração do Swagger
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwaggerConfiguration();
+        }
 
         // Aplicar CORS
         app.UseCors("AllowAll");

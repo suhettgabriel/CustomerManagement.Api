@@ -1,9 +1,6 @@
-﻿using FluentValidation.AspNetCore;
-using CustomerManagement.Infrastructure.Context;
+﻿using CustomerManagement.Infrastructure.Context;
 using CustomerManagement.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using MediatR;
 using CustomerManagement.Application.Commands;
 using CustomerManagement.Domain.Interfaces;
 
@@ -20,9 +17,9 @@ namespace CustomerManagement.Api.Configurations
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))); 
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<ICustomerRepository, CustomerRepository>(); 
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
             return services;
         }
     }

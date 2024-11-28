@@ -1,8 +1,6 @@
-using CustomerManagement.Domain.Entities;
 using CustomerManagement.Domain.Interfaces;
 using CustomerManagement.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
 
 namespace CustomerManagement.Infrastructure.Repositories
 {
@@ -29,5 +27,21 @@ namespace CustomerManagement.Infrastructure.Repositories
         {
             return await _context.Customers.FindAsync(customerId);
         }
+        public async Task UpdateAsync(Customer customer)
+        {
+            _context.Customers.Update(customer);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(Guid customerId)
+        {
+            var customer = await _context.Customers.FindAsync(customerId);
+            if (customer != null)
+            {
+                _context.Customers.Remove(customer);
+                await _context.SaveChangesAsync();
+            }
+        }
+
     }
 }

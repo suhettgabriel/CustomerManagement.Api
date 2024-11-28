@@ -3,7 +3,6 @@ using CustomerManagement.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using CustomerManagement.Api.Configurations;
 using CustomerManagement.Application.Commands;
-using MediatR;
 
 internal class Program
 {

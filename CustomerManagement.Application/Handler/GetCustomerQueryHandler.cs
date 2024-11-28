@@ -18,10 +18,11 @@ namespace CustomerManagement.Application.Handler
             var customers = await _customerRepository.GetAllAsync();
             return customers.Select(c => new CustomerViewModel
             {
-                Id = BitConverter.ToInt32(c.Id.ToByteArray(), 0),
+                Id = c.Id.ToString(), 
                 CompanyName = c.CompanyName,
                 CompanySize = c.CompanySize
             }).ToList();
         }
+
     }
- }
+}
